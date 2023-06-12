@@ -1,0 +1,5 @@
+com\cooperagro\backend\exception\ResponseExceptionHandler.class
+com\cooperagro\backend\exception\SistemaMessageCode.class
+com\cooperagro\backend\configuration\SwaggerConfig.class
+com\cooperagro\backend\configuration\WebConfig.class
+com\cooperagro\backend\CooperagroBackendApplication.class
