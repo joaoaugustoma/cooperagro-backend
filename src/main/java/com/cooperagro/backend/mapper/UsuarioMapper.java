@@ -7,5 +7,4 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = { EnderecoMapper.class })
 public interface UsuarioMapper extends BaseMapper<Usuario, UsuarioDTO> {
-
 }

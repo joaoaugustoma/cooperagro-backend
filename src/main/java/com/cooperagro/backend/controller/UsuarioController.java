@@ -1,11 +1,16 @@
 package com.cooperagro.backend.controller;
 
+import br.ueg.prog.webi.api.dto.CredencialDTO;
+import br.ueg.prog.webi.api.exception.MessageResponse;
+import com.cooperagro.backend.dto.UsuarioDTO;
+import com.cooperagro.backend.mapper.UsuarioMapper;
+import com.cooperagro.backend.model.Usuario;
+import com.cooperagro.backend.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Tag(name = "API")
 @RequestMapping("${app.api.base}/usuario")
 public class UsuarioController {
 
@@ -39,8 +43,8 @@ public class UsuarioController {
             })
     @PostMapping(path = "/incluir", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> incluir(@RequestBody UsuarioDTO usuarioDTO) {
-        Usuario usuario = usuarioMapper.toModel(usuarioDTO);
-        usuario = usuarioService.persist(usuario);
+        Usuario usuario = usuarioMapper.toModelo(usuarioDTO);
+        usuario = usuarioService.salvar(usuario);
         return ResponseEntity.ok(usuarioMapper.toDTO(usuario));
     }
 }
