@@ -1,16 +1,21 @@
 package com.cooperagro.backend.model;
 
-import com.cooperagro.backend.model.generic.GenericTabela;
+import br.ueg.prog.webi.api.model.IEntidade;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
-@Entity(name = "ESTADO")
-public class Estado extends GenericTabela {
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Entity
+@Table(name = "TBL_ESTADO")
+public class Estado implements IEntidade<Long> {
 
     @Id
     @Column(name = "ID_ESTADO")
@@ -25,4 +30,9 @@ public class Estado extends GenericTabela {
 
     @OneToMany(mappedBy = "estado",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Cidade> cidadeSet;
+
+    @Override
+    public String getTabelaNome() {
+        return "TBL_ESTADO";
+    }
 }

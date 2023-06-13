@@ -1,14 +1,19 @@
 package com.cooperagro.backend.model;
 
-import com.cooperagro.backend.model.generic.GenericTabela;
+import br.ueg.prog.webi.api.model.IEntidade;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
-@Entity(name = "ENDERECO")
-public class Endereco extends GenericTabela {
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Entity
+@Table(name = "TBL_ENDERECO")
+public class Endereco implements IEntidade<Long> {
 
     @Id
     @Column(name = "ID_ENDERECO")
@@ -33,5 +38,10 @@ public class Endereco extends GenericTabela {
 
     @Column(nullable = false, name = "CEP")
     private String cep;
+
+    @Override
+    public String getTabelaNome() {
+        return "TBL_ENDERECO";
+    }
 }
 

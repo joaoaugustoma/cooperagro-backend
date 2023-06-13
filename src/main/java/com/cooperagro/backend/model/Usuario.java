@@ -1,14 +1,19 @@
 package com.cooperagro.backend.model;
 
-import com.cooperagro.backend.model.generic.GenericTabela;
+import br.ueg.prog.webi.api.model.IEntidade;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
-@Entity(name = "USUARIO")
-public class Usuario extends GenericTabela {
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Entity
+@Table(name = "TBL_USUARIO")
+public class Usuario implements IEntidade<Long> {
     @Id
     @Column(name = "ID_USUARIO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +38,11 @@ public class Usuario extends GenericTabela {
     private boolean status;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_ENDERECO", nullable = false)
+    @JoinColumn(name = "ID_ENDERECO")
     private Endereco endereco;
+
+    @Override
+    public String getTabelaNome() {
+        return "TBL_USUARIO";
+    }
 }
