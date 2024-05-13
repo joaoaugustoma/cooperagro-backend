@@ -2,7 +2,7 @@ package com.ueg.cooperagro.generic.controller;
 
 import com.ueg.cooperagro.generic.mapper.GenericMapper;
 import com.ueg.cooperagro.generic.model.GenericModel;
-import com.ueg.cooperagro.generic.service.GenericCrudService;
+import com.ueg.cooperagro.generic.service.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +17,9 @@ public abstract class GenericCrudController<
         DTOList,
         MODEL extends GenericModel<TYPE_PK>,
         TYPE_PK,
-        SERVICE extends GenericCrudService<
-                        MODEL,
-                        TYPE_PK>,
+        SERVICE extends CrudService<
+                                MODEL,
+                                TYPE_PK>,
         MAPPER extends GenericMapper<DTO,DTOCreate, DTOUpdate, DTOList , MODEL, TYPE_PK>
         > {
 
