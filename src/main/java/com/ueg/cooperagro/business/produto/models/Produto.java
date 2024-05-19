@@ -1,5 +1,6 @@
 package com.ueg.cooperagro.business.produto.models;
 
+import com.ueg.cooperagro.business.carrinhocompras.models.CarrinhoCompra;
 import com.ueg.cooperagro.business.produto.models.enums.CategoriaEnum;
 import com.ueg.cooperagro.business.usuario.models.Agricultor;
 import com.ueg.cooperagro.generic.model.GenericModel;
@@ -16,7 +17,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Produto")
+@Table(name = "PRODUTO")
 public class Produto implements GenericModel<Long> {
     public final static String SEQUENCE_NAME = "produto_sequence";
 
@@ -64,4 +65,8 @@ public class Produto implements GenericModel<Long> {
     @ManyToOne
     @JoinColumn(name = "ID_AGRICULTOR", nullable = false)
     private Agricultor agricultor;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_CARRINHO_COMPRA", nullable = false)
+    private CarrinhoCompra carrinhoCompra;
 }
