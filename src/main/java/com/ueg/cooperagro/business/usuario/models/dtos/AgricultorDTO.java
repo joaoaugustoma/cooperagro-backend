@@ -1,4 +1,17 @@
 package com.ueg.cooperagro.business.usuario.models.dtos;
 
-public class AgricultorDTO {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+@Data
+@ToString
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public class AgricultorDTO extends UsuarioDTO {
+    private Long id;
+    private String cnpj;
 }

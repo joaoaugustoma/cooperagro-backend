@@ -30,4 +30,7 @@ public class Agricultor extends Usuario implements GenericModel<Long> {
     )
     @Column(name = "ID", nullable = false)
     private Long id;
+
+    @Column(name = "CNPJ", nullable = false)
+    private String cnpj;
 }

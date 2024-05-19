@@ -3,11 +3,11 @@ package com.ueg.cooperagro.business.usuario.services.impl;
 import com.ueg.cooperagro.business.usuario.models.Agricultor;
 import com.ueg.cooperagro.business.usuario.repositories.AgricultorRepository;
 import com.ueg.cooperagro.business.usuario.services.AgricultorService;
-import com.ueg.cooperagro.generic.service.GenericCrudService;
+import com.ueg.cooperagro.generic.service.impl.GenericCrudServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AgricultorServiceImpl extends GenericCrudService<Agricultor, Long, AgricultorRepository> implements AgricultorService {
+public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Long, AgricultorRepository> implements AgricultorService {
     @Override
     protected void prepareToCreate(Agricultor dado) {
 

@@ -6,8 +6,7 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-//TODO explicar o Named e IterableMapping
-// Explicar o GenericUpdateMapper
+
 public interface GenericMapper<
         DTO,
         DTOCreate,
@@ -25,9 +24,9 @@ public interface GenericMapper<
 
     DTO toDTO(MODEL model);
 
-    @Named(value = "toDTOList") // para identificar o nome desse metodo pelo mapstruct
+    @Named(value = "toDTOList")
     DTOList toDTOList(MODEL model);
 
-    @IterableMapping(qualifiedByName = "toDTOList") // para orientar qual metodo utilizar no caso de vários target=source;
+    @IterableMapping(qualifiedByName = "toDTOList")
     List<DTOList> fromModelToDTOList(List<MODEL> modelList);
 }

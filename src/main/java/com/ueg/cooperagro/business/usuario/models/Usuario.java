@@ -6,6 +6,11 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
+import com.ueg.cooperagro.business.endereco.models.Endereco;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -33,7 +38,33 @@ public class Usuario implements GenericModel<Long> {
     @Column(name = "NOME_RAZAO_SOCIAL", nullable = false)
     private String nome;
 
+    @Column(name="LOGIN", nullable = false)
+    private String login;
+
+    @Column(name="SENHA", nullable = false)
+    private String senha;
+
     @Column(name = "IS_AGRICULTOR", nullable = false)
     private boolean isAgricultor;
 
+    @Column(name= "STATUS", nullable = false)
+    private boolean status;
+
+    @Column(name = "TELEFONE_PRINCIPAL", nullable = false)
+    private String telefonePrincipal;
+
+    @Column(name = "TELEFONE_SECUNDARIO", nullable = true)
+    private String telefoneSecundario;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Endereco> enderecos = new ArrayList<>();
+
+    public Endereco getEnderecoPrincipal() {
+        for (Endereco endereco : enderecos) {
+            if (endereco.isPrincipal()) {
+                return endereco;
+            }
+        }
+        return null;
+    }
 }

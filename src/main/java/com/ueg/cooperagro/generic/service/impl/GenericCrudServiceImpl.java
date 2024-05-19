@@ -56,8 +56,6 @@ public abstract class GenericCrudServiceImpl<
         mapper.updateModelFromModel(dataDB, dataToUpdate);
     }
 
-    ;
-
     @Override
     public MODEL getById(TYPE_PK id) {
         return this.validateIdModelExists(id);
