@@ -13,5 +13,4 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class AgricultorDTO extends UsuarioDTO {
     private Long id;
-    private String cnpj;
 }

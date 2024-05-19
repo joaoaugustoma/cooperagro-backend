@@ -1,4 +1,4 @@
-package com.ueg.cooperagro.business.exceptions;
+package com.ueg.cooperagro.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

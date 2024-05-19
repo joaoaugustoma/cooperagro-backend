@@ -1,4 +1,4 @@
-package com.ueg.cooperagro.business.exceptions;
+package com.ueg.cooperagro.exceptions;
 
 import lombok.Getter;
 

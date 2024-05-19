@@ -1,6 +1,6 @@
 package com.ueg.cooperagro.generic.service.impl;
 
-import com.ueg.cooperagro.business.exceptions.DataException;
+import com.ueg.cooperagro.exceptions.DataException;
 import com.ueg.cooperagro.generic.mapper.GenericUpdateMapper;
 import com.ueg.cooperagro.generic.model.GenericModel;
 import com.ueg.cooperagro.generic.service.GenericCrudService;

@@ -36,7 +36,10 @@ public class Usuario implements GenericModel<Long> {
     private Long id;
 
     @Column(name = "NOME_RAZAO_SOCIAL", nullable = false)
-    private String nome;
+    private String nomeRazaoSocial;
+
+    @Column(name = "CPF_CNPJ", nullable = false)
+    private String cpfCnpj;
 
     @Column(name="LOGIN", nullable = false)
     private String login;

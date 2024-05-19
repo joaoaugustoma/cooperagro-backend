@@ -30,4 +30,6 @@ public class Comerciante extends Usuario implements GenericModel<Long> {
     )
     @Column(name = "ID", nullable = false)
     private Long id;
+
+
 }

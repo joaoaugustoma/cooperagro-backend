@@ -15,7 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioDataDTO {
-    private String nome;
+    private String nomeRazaoSocial;
+    private String cpfCnpj;
     private String login;
     private String senha;
     private boolean isAgricultor;
