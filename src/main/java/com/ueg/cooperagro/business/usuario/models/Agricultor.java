@@ -1,9 +1,12 @@
 package com.ueg.cooperagro.business.usuario.models;
 
+import com.ueg.cooperagro.business.produto.models.Produto;
 import com.ueg.cooperagro.generic.model.GenericModel;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 
 @Getter
@@ -30,4 +33,7 @@ public class Agricultor extends Usuario implements GenericModel<Long> {
 
     @Column(name = "EXPIRES_IN", nullable = false)
     private Long expiresIn;
+
+    @OneToMany(mappedBy = "agricultor", cascade = CascadeType.ALL)
+    private List<Produto> produtos;
 }
