@@ -18,7 +18,7 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "USUARIO")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Usuario implements GenericModel<Long> {
     public final static String SEQUENCE_NAME = "usuario_sequence";
 

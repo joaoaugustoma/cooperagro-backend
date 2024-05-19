@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Getter
 @Setter
@@ -16,18 +15,19 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @Table(name = "AGRICULTOR")
 public class Agricultor extends Usuario implements GenericModel<Long> {
-    public final static String SEQUENCE_NAME = "agricultor_sequence";
 
-    @Id
-    @SequenceGenerator(
-            name=SEQUENCE_NAME,
-            sequenceName = SEQUENCE_NAME+"_bd",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = SEQUENCE,
-            generator = SEQUENCE_NAME
-    )
-    @Column(name = "ID", nullable = false)
-    private Long id;
+    @Column(name = "NOME_FANTASIA", nullable = false)
+    private String nomeFantasia;
+
+    @Column(name = "CLIENT_ID", nullable = false)
+    private String clientId;
+
+    @Column(name = "CLIENT_SECRET", nullable = false)
+    private String clientSecret;
+
+    @Column(name = "REFRESH_TOKEN", nullable = false)
+    private String refreshToken;
+
+    @Column(name = "EXPIRES_IN", nullable = false)
+    private Long expiresIn;
 }
