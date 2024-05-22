@@ -7,6 +7,8 @@ import com.ueg.cooperagro.business.usuario.models.dtos.AgricultorDataDTO;
 import com.ueg.cooperagro.business.usuario.models.dtos.AgricultorListDTO;
 import com.ueg.cooperagro.business.usuario.services.AgricultorService;
 import com.ueg.cooperagro.generic.controller.GenericCrudController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,4 +25,8 @@ public class AgricultorController extends
                         AgricultorService, //Interface Serviço
                         AgricultorMapper> // Mapper
 {
+    @GetMapping("/TESTEAUTH")
+    public ResponseEntity<String> testeAuth() {
+        return ResponseEntity.ok("OK");
+    }
 }

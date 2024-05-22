@@ -13,4 +13,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class AgricultorDataDTO extends UsuarioDataDTO {
     private String nomeFantasia;
+    private String clientId;
+    private String clientSecret;
+    private String refreshToken;
+    private Long expiresIn;
 }
