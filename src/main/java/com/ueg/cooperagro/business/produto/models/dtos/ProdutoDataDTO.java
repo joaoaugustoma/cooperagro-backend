@@ -13,7 +13,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProdutoDataDTO {
-    private Long id;
     private String titulo;
     private String descricao;
     private Double precoUnitario;
