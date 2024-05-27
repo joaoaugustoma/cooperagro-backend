@@ -67,6 +67,6 @@ public class Endereco implements GenericModel<Long> {
     private String apelido;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "ID_USUARIO", nullable = false)
     private Usuario usuario;
 }

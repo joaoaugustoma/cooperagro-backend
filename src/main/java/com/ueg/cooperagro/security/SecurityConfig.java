@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,14 +24,17 @@ public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
     private final SecurityFilter securityFilter;
 
+    @Value("${api.version}")
+    private String apiVersion;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/${api.version}/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/${api.version}/auth/registro").permitAll()
+                        .requestMatchers(HttpMethod.POST, apiVersion+"/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, apiVersion+"/auth/registro").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);

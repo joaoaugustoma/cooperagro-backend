@@ -13,7 +13,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @SuperBuilder
 @NoArgsConstructor
@@ -69,5 +68,15 @@ public class Usuario implements GenericModel<Long> {
             }
         }
         return null;
+    }
+
+    public void addEndereco(Endereco endereco) {
+        enderecos.add(endereco);
+        endereco.setUsuario(this);
+    }
+
+    public void removeEndereco(Endereco endereco) {
+        enderecos.remove(endereco);
+        endereco.setUsuario(null);
     }
 }
