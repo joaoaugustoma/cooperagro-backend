@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ueg</groupId>
-	<artifactId>cooperagro</artifactId>
+	<artifactId>cooperagro-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CooperAgro</name>
 	<description>CooperAgro</description>
