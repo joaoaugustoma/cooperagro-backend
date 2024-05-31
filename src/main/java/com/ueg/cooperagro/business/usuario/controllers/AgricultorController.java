@@ -25,8 +25,4 @@ public class AgricultorController extends
                         AgricultorService, //Interface Serviço
                         AgricultorMapper> // Mapper
 {
-    @GetMapping("/TESTEAUTH")
-    public ResponseEntity<String> testeAuth() {
-        return ResponseEntity.ok("OK");
-    }
 }
