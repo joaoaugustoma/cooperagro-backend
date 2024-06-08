@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, apiVersion+"/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, apiVersion+"/auth/registro").permitAll()
+                        .requestMatchers(HttpMethod.GET, apiVersion+"/endereco/consulta-cep/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
