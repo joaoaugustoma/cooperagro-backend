@@ -2,7 +2,17 @@ package com.ueg.cooperagro.business.auth.dtos;
 
 import com.ueg.cooperagro.business.endereco.models.dtos.EnderecoDataDTO;
 
-import java.util.List;
-
-public record RegisterRequestDTO(String nomeRazaoSocial, String email, String senha, String cpfCnpj, String telefonePrincipal, String telefoneSecundario, boolean isAgricultor, List<EnderecoDataDTO> enderecos) {
+public record RegisterRequestDTO(
+        String telefone,
+        String email,
+        String senha,
+        String senhaConfirm,
+        String cnpj,
+        String razaoSocial,
+        String uploadFoto,
+        String typeFoto,
+        boolean isAgricultor,
+        EnderecoDataDTO endereco) {
 }
+
+

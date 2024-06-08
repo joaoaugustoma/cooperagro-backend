@@ -1,6 +1,5 @@
 package com.ueg.cooperagro.business.endereco.models.dtos;
 
-import com.ueg.cooperagro.business.endereco.models.enums.TipoEnderecoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,4 @@ public class EnderecoDTO {
     private String estado;
     private boolean isPrincipal;
     private boolean status;
-    private TipoEnderecoEnum tipoEndereco;
-    private String apelido;
-    private Long usuarioId;
 }

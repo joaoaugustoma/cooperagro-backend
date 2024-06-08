@@ -22,17 +22,17 @@ public class Agricultor extends Usuario implements GenericModel<Long> {
     @Column(name = "NOME_FANTASIA", nullable = false)
     private String nomeFantasia;
 
-    @Column(name = "CLIENT_ID", nullable = false)
-    private String clientId;
+    @Column(name = "GATEWAY_PAGAMENTO_CLIENT_ID", nullable = false)
+    private String gatewayPagamentoClientId;
 
-    @Column(name = "CLIENT_SECRET", nullable = false)
-    private String clientSecret;
+    @Column(name = "GATEWAY_PAGAMENTO_CLIENT_SECRET", nullable = false)
+    private String gatewayPagamentoClientSecret;
 
-    @Column(name = "REFRESH_TOKEN", nullable = false)
-    private String refreshToken;
+    @Column(name = "GATEWAY_PAGAMENTO_REFRESH_TOKEN", nullable = false)
+    private String gatewayPagamentoRefreshToken;
 
-    @Column(name = "EXPIRES_IN", nullable = false)
-    private Long expiresIn;
+    @Column(name = "GATEWAY_PAGAMENTO_EXPIRES_IN", nullable = false)
+    private Long gatewayPagamentoExpiresIn;
 
     @OneToMany(mappedBy = "agricultor", cascade = CascadeType.ALL)
     private List<Produto> produtos;

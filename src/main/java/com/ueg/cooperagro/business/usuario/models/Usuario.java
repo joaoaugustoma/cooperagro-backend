@@ -52,11 +52,14 @@ public class Usuario implements GenericModel<Long> {
     @Column(name= "STATUS", nullable = false)
     private boolean status;
 
-    @Column(name = "TELEFONE_PRINCIPAL", nullable = false)
-    private String telefonePrincipal;
+    @Column(name = "TELEFONE", nullable = false)
+    private String telefone;
 
-    @Column(name = "TELEFONE_SECUNDARIO", nullable = true)
-    private String telefoneSecundario;
+    @Column(name = "BYTE_FOTO")
+    private byte[] byteFoto;
+
+    @Column(name = "TYPE_FOTO")
+    private String typeFoto;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endereco> enderecos = new ArrayList<>();

@@ -34,40 +34,24 @@ public class AuthService {
         Usuario novoUsuario = new Usuario();
         novoUsuario.setSenha(passwordEncoder.encode(body.senha()));
         novoUsuario.setEmail(body.email());
-        novoUsuario.setNomeRazaoSocial(body.nomeRazaoSocial());
-        novoUsuario.setCpfCnpj(body.cpfCnpj());
+        novoUsuario.setNomeRazaoSocial(body.razaoSocial());
+        novoUsuario.setCpfCnpj(body.cnpj());
         novoUsuario.setAgricultor(false);
-        novoUsuario.setTelefonePrincipal(body.telefonePrincipal());
+        novoUsuario.setTelefone(body.telefone());
         novoUsuario.setStatus(true);
+        novoUsuario.setByteFoto(body.uploadFoto().getBytes());
+        novoUsuario.setTypeFoto(body.typeFoto());
 
-        if (body.telefoneSecundario() != null) {
-            novoUsuario.setTelefoneSecundario(body.telefoneSecundario());
+        novoUsuario.setAgricultor(false);
+
+        if (body.endereco() != null) {
+            Endereco endereco = enderecoMapper.fromModelCreatedToModel(body.endereco());
+            endereco.setUsuario(novoUsuario);
+            endereco.setPrincipal(true);
+
+            novoUsuario.addEndereco(endereco);
         }
 
-        if (body.isAgricultor()) {
-            novoUsuario.setAgricultor(true);
-        }
-
-        boolean hasPrincipal = false;
-        if (body.enderecos() != null && !body.enderecos().isEmpty()) {
-            for (EnderecoDataDTO enderecoDTO : body.enderecos()) {
-                Endereco endereco = enderecoMapper.fromModelCreatedToModel(enderecoDTO);
-                endereco.setUsuario(novoUsuario);
-
-                if (endereco.isPrincipal()) {
-                    if (hasPrincipal) {
-                        throw new IllegalArgumentException("Only one address can be set as principal");
-                    }
-                    hasPrincipal = true;
-                }
-
-                novoUsuario.getEnderecos().add(endereco);
-            }
-        }
-
-        if (!hasPrincipal && !novoUsuario.getEnderecos().isEmpty()) {
-            novoUsuario.getEnderecos().get(0).setPrincipal(true);
-        }
 
         this.usuarioRepository.save(novoUsuario);
 

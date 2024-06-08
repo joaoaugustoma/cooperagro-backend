@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Date;
 import java.util.List;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
@@ -40,6 +41,9 @@ public class CarrinhoCompra implements GenericModel<Long> {
 
     @Column(name = "QUANTIDADE_TOTAL", nullable = false)
     private Integer quantidadeTotal;
+
+    @Column(name = "DATA_CRIACAO", nullable = false)
+    private Date dataCriacao;
 
     @OneToMany(mappedBy = "carrinhoCompra", fetch = FetchType.LAZY)
     private List<Produto> itensCarrinho;

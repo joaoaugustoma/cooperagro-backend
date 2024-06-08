@@ -43,20 +43,20 @@ public class Produto implements GenericModel<Long> {
     @Column(name = "PRECO_UNITARIO", nullable = false)
     private Double precoUnitario;
 
-    @Column(name = "BYTE_FOTO", nullable = false)
+    @Column(name = "BYTE_FOTO")
     private byte[] byteFoto;
 
     @Column(name = "STATUS", nullable = false)
     private boolean status;
 
     @Column(name = "PERIODO_PRODUCAO", nullable = false)
-    private String periodoProducao;
+    private Long periodoProducao;
 
-    @Column(name = "CAPACIDADE_PRODUTIVA", nullable = false)
-    private Double capacidadeProdutiva;
+    @Column(name = "UNIDADE_PERIODO_PRODUCAO", nullable = false)
+    private String unidadePeriodoProducao;
 
-    @Column(name = "IS_ORGANICO", nullable = false)
-    private boolean isOrganico;
+    @Column(name = "UNIDADE_CAPACIDADE_PRODUTIVA", nullable = false)
+    private String unidadeCapacidadeProdutiva;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "CATEGORIA", nullable = false)

@@ -1,6 +1,5 @@
 package com.ueg.cooperagro.business.endereco.models;
 
-import com.ueg.cooperagro.business.endereco.models.enums.TipoEnderecoEnum;
 import com.ueg.cooperagro.business.usuario.models.Usuario;
 import com.ueg.cooperagro.generic.model.GenericModel;
 import jakarta.persistence.*;
@@ -56,15 +55,6 @@ public class Endereco implements GenericModel<Long> {
 
     @Column(name = "IS_PRINCIPAL", nullable = false)
     private boolean isPrincipal;
-
-    @Column(name = "STATUS", nullable = false)
-    private boolean status;
-
-    @Column(name= "TIPO_ENDERECO", nullable = false)
-    private TipoEnderecoEnum tipoEndereco;
-
-    @Column(name = "APELIDO" , nullable = true)
-    private String apelido;
 
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO", nullable = false)
