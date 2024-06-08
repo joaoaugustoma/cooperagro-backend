@@ -5,7 +5,6 @@ import com.ueg.cooperagro.business.auth.dtos.RegisterRequestDTO;
 import com.ueg.cooperagro.business.auth.dtos.ResponseAuthDTO;
 import com.ueg.cooperagro.business.endereco.mappers.EnderecoMapper;
 import com.ueg.cooperagro.business.endereco.models.Endereco;
-import com.ueg.cooperagro.business.endereco.models.dtos.EnderecoDataDTO;
 import com.ueg.cooperagro.business.usuario.models.Usuario;
 import com.ueg.cooperagro.business.usuario.repositories.UsuarioRepository;
 import com.ueg.cooperagro.security.TokenService;

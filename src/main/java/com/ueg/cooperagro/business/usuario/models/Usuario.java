@@ -1,15 +1,18 @@
 package com.ueg.cooperagro.business.usuario.models;
 
+import com.ueg.cooperagro.business.endereco.models.Endereco;
 import com.ueg.cooperagro.generic.model.GenericModel;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import static jakarta.persistence.GenerationType.SEQUENCE;
-
-import com.ueg.cooperagro.business.endereco.models.Endereco;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Getter
 @Setter
