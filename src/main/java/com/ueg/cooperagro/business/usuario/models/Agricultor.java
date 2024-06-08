@@ -22,16 +22,16 @@ public class Agricultor extends Usuario implements GenericModel<Long> {
     @Column(name = "NOME_FANTASIA", nullable = false)
     private String nomeFantasia;
 
-    @Column(name = "GATEWAY_PAGAMENTO_CLIENT_ID", nullable = false)
+    @Column(name = "GATEWAY_PAGAMENTO_CLIENT_ID")
     private String gatewayPagamentoClientId;
 
-    @Column(name = "GATEWAY_PAGAMENTO_CLIENT_SECRET", nullable = false)
+    @Column(name = "GATEWAY_PAGAMENTO_CLIENT_SECRET")
     private String gatewayPagamentoClientSecret;
 
-    @Column(name = "GATEWAY_PAGAMENTO_REFRESH_TOKEN", nullable = false)
+    @Column(name = "GATEWAY_PAGAMENTO_REFRESH_TOKEN")
     private String gatewayPagamentoRefreshToken;
 
-    @Column(name = "GATEWAY_PAGAMENTO_EXPIRES_IN", nullable = false)
+    @Column(name = "GATEWAY_PAGAMENTO_EXPIRES_IN")
     private Long gatewayPagamentoExpiresIn;
 
     @OneToMany(mappedBy = "agricultor", cascade = CascadeType.ALL)

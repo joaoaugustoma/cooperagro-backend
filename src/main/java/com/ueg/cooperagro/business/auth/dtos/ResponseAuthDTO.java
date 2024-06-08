@@ -1,3 +1,3 @@
 package com.ueg.cooperagro.business.auth.dtos;
 
-public record ResponseAuthDTO(String nomeRazaoSocial, String authToken){}
+public record ResponseAuthDTO(String nomeRazaoSocial, String authToken, boolean isAgricultor){}

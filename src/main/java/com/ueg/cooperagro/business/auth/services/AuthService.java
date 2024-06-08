@@ -56,14 +56,14 @@ public class AuthService {
         this.usuarioRepository.save(novoUsuario);
 
         String token = this.tokenService.generateToken(novoUsuario);
-        return ResponseEntity.ok(new ResponseAuthDTO(novoUsuario.getNomeRazaoSocial(), token));
+        return ResponseEntity.ok(new ResponseAuthDTO(novoUsuario.getNomeRazaoSocial(), token, novoUsuario.isAgricultor()));
     }
 
     public ResponseEntity<?> login(LoginRequestDTO loginRequestDTO) {
         Usuario usuario = usuarioRepository.findByEmail(loginRequestDTO.email()).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         if (passwordEncoder.matches(loginRequestDTO.senha(), usuario.getSenha())) {
             String token = tokenService.generateToken(usuario);
-            return ResponseEntity.ok(new ResponseAuthDTO(usuario.getNomeRazaoSocial(), token));
+            return ResponseEntity.ok(new ResponseAuthDTO(usuario.getNomeRazaoSocial(), token, usuario.isAgricultor()));
         } else {
             return ResponseEntity.badRequest().build();
         }
