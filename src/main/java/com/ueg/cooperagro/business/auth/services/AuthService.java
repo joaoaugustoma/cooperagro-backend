@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.Optional;
 
 @Service
@@ -39,7 +40,7 @@ public class AuthService {
         novoUsuario.setAgricultor(false);
         novoUsuario.setTelefone(body.telefone());
         novoUsuario.setStatus(true);
-        novoUsuario.setByteFoto(body.uploadFoto().getBytes());
+        novoUsuario.setByteFoto(Base64.getDecoder().decode(body.uploadFoto()));
         novoUsuario.setTypeFoto(body.typeFoto());
 
         novoUsuario.setAgricultor(false);
