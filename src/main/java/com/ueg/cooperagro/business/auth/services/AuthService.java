@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -55,15 +57,17 @@ public class AuthService {
 
         this.usuarioRepository.save(novoUsuario);
 
-        String token = this.tokenService.generateToken(novoUsuario);
-        return ResponseEntity.ok(new ResponseAuthDTO(novoUsuario.getNomeRazaoSocial(), token, novoUsuario.isAgricultor()));
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Usuário registrado com sucesso!");
+
+        return ResponseEntity.ok(response);
     }
 
     public ResponseEntity<?> login(LoginRequestDTO loginRequestDTO) {
         Usuario usuario = usuarioRepository.findByEmail(loginRequestDTO.email()).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         if (passwordEncoder.matches(loginRequestDTO.senha(), usuario.getSenha())) {
             String token = tokenService.generateToken(usuario);
-            return ResponseEntity.ok(new ResponseAuthDTO(usuario.getNomeRazaoSocial(), token, usuario.isAgricultor()));
+            return ResponseEntity.ok(new ResponseAuthDTO(usuario.getNomeRazaoSocial(), token, usuario.isAgricultor() ? "true" : "false"));
         } else {
             return ResponseEntity.badRequest().build();
         }
