@@ -19,18 +19,9 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @Table(name = "PRODUTO")
 public class Produto implements GenericModel<Long> {
-    public final static String SEQUENCE_NAME = "produto_sequence";
 
     @Id
-    @SequenceGenerator(
-            name=SEQUENCE_NAME,
-            sequenceName = SEQUENCE_NAME+"_bd",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = SEQUENCE,
-            generator = SEQUENCE_NAME
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID", nullable = false)
     private Long id;
 

@@ -24,7 +24,6 @@ import java.util.List;
 public class SecurityFilter extends OncePerRequestFilter {
 
     private final TokenService tokenService;
-
     private final UsuarioRepository usuarioRepository;
 
     @Override

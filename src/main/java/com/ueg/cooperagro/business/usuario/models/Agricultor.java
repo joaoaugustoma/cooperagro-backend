@@ -17,10 +17,19 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "AGRICULTOR")
-public class Agricultor extends Usuario implements GenericModel<Long> {
+public class Agricultor implements GenericModel<Long> {
 
-    @Column(name = "NOME_FANTASIA", nullable = false)
-    private String nomeFantasia;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "ID", nullable = false)
+    private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "ID_USUARIO", nullable = false)
+    private Usuario usuario;
+
+    @Column(name = "NOME_LOJA", nullable = false)
+    private String nomeLoja;
 
     @Column(name = "GATEWAY_PAGAMENTO_CLIENT_ID")
     private String gatewayPagamentoClientId;

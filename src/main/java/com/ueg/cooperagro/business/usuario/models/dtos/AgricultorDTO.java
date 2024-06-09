@@ -11,10 +11,11 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AgricultorDTO extends UsuarioDTO {
+public class AgricultorDTO {
     private String nomeFantasia;
     private String clientId;
     private String clientSecret;
     private String refreshToken;
     private Long expiresIn;
+    private Long usuarioId;
 }

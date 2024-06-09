@@ -24,9 +24,12 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
+            String role = usuario.isAgricultor() ? "ROLE_AGRICULTOR" : "ROLE_USUARIO";
+
             return JWT.create()
                     .withIssuer(TOKEN_ISSUER)
                     .withSubject(usuario.getEmail())
+                    .withClaim("role", role)  // Adicionar a role no token
                     .withExpiresAt(generateExpirationDate())
                     .sign(algorithm);
         } catch (JWTCreationException e) {
