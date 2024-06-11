@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping(path = "${api.version}/agricultor")
 public class AgricultorController extends
@@ -33,6 +35,18 @@ public class AgricultorController extends
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar perfil para agricultor.");
+        }
+    }
+
+    @PutMapping("/cancelar-agricultor")
+    public ResponseEntity<?> cancelarAgricultor(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        try {
+            String novoToken = service.cancelarAgricultor(email);
+            return ResponseEntity.ok(novoToken);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar perfil para usuário.");
         }
     }
 }

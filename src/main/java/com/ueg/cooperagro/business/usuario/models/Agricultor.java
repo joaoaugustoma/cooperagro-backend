@@ -25,7 +25,7 @@ public class Agricultor implements GenericModel<Long> {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "ID_USUARIO", nullable = false)
+    @JoinColumn(name = "ID_USUARIO")
     private Usuario usuario;
 
     @Column(name = "NOME_LOJA", nullable = false)
@@ -43,6 +43,10 @@ public class Agricultor implements GenericModel<Long> {
     @Column(name = "GATEWAY_PAGAMENTO_EXPIRES_IN")
     private Long gatewayPagamentoExpiresIn;
 
+    @Column(name = "STATUS", nullable = false)
+    private boolean status = true;
+
     @OneToMany(mappedBy = "agricultor", cascade = CascadeType.ALL)
     private List<Produto> produtos;
+
 }

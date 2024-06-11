@@ -62,4 +62,20 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
         return tokenService.generateToken(usuario);
     }
 
+    @Override
+    public String cancelarAgricultor(String email) {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado!"));
+
+        usuario.setAgricultor(false);
+        usuario.setStatus(true);
+        usuarioRepository.save(usuario);
+
+        Agricultor agricultor = repository.findByUsuarioId(usuario.getId())
+                .orElseThrow(() -> new UsernameNotFoundException("Agricultor não encontrado!"));
+        repository.delete(agricultor);
+
+        return tokenService.generateToken(usuario);
+    }
+
 }

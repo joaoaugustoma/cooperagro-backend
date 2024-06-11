@@ -6,5 +6,7 @@ import com.ueg.cooperagro.generic.service.CrudService;
 import org.springframework.http.ResponseEntity;
 
 public interface AgricultorService extends CrudService<Agricultor, Long> {
-    String tornarAgricultor(TornarAgricultorRequestDTO nomeLoja);
+    String tornarAgricultor(TornarAgricultorRequestDTO request);
+
+    String cancelarAgricultor(String email);
 }
