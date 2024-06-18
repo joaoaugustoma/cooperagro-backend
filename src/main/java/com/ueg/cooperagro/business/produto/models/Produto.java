@@ -1,5 +1,6 @@
 package com.ueg.cooperagro.business.produto.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.ueg.cooperagro.business.carrinhocompras.models.CarrinhoCompra;
 import com.ueg.cooperagro.business.usuario.models.Agricultor;
 import com.ueg.cooperagro.generic.model.GenericModel;
@@ -66,6 +67,7 @@ public class Produto implements GenericModel<Long> {
 
     @ManyToOne
     @JoinColumn(name = "ID_AGRICULTOR", nullable = false)
+    @JsonBackReference
     private Agricultor agricultor;
 
 }

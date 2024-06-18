@@ -1,5 +1,6 @@
 package com.ueg.cooperagro.business.usuario.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ueg.cooperagro.business.produto.models.Produto;
 import com.ueg.cooperagro.generic.model.GenericModel;
 import jakarta.persistence.*;
@@ -47,6 +48,7 @@ public class Agricultor implements GenericModel<Long> {
     private boolean status = true;
 
     @OneToMany(mappedBy = "agricultor", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Produto> produtos;
 
 }
