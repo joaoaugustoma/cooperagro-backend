@@ -2,8 +2,6 @@ package com.ueg.cooperagro.business.carrinhocompras.models.dtos;
 
 import com.ueg.cooperagro.business.pedidovenda.models.PedidoVenda;
 import com.ueg.cooperagro.business.produto.models.Produto;
-import com.ueg.cooperagro.business.produto.models.enums.CategoriaEnum;
-import com.ueg.cooperagro.business.usuario.models.Agricultor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

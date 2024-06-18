@@ -49,4 +49,9 @@ public class AgricultorController extends
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar perfil para usuário.");
         }
     }
+
+    @GetMapping("/id/{email}")
+    private Long getIdAgricultorByEmail(@PathVariable String email) {
+        return service.getIdAgricultorByEmail(email);
+    }
 }

@@ -9,4 +9,6 @@ public interface AgricultorService extends CrudService<Agricultor, Long> {
     String tornarAgricultor(TornarAgricultorRequestDTO request);
 
     String cancelarAgricultor(String email);
+
+    Long getIdAgricultorByEmail(String email);
 }

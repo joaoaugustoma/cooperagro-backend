@@ -78,4 +78,9 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
         return tokenService.generateToken(usuario);
     }
 
+    @Override
+    public Long getIdAgricultorByEmail(String email) {
+        return repository.getAgricultorIdByEmail(email);
+    }
+
 }

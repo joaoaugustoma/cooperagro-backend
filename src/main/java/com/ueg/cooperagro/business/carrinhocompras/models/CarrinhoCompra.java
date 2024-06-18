@@ -36,9 +36,7 @@ public class CarrinhoCompra implements GenericModel<Long> {
     @Column(name = "DATA_CRIACAO", nullable = false)
     private Date dataCriacao;
 
-    @OneToMany(mappedBy = "carrinhoCompra", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_CARRINHO_COMPRA")
     private List<Produto> itensCarrinho;
-
-    @OneToOne(mappedBy = "carrinhoCompra", fetch = FetchType.LAZY)
-    private PedidoVenda pedidoVenda;
 }
