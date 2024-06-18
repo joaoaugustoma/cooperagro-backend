@@ -24,7 +24,7 @@ public class ProdutoDataDTO {
     private String unidadePrazo;
     private String categoria;
     private Long idAgricultor;
-    private String uploadFoto;
+    private Byte[] byteFoto;
     private String typeFoto;
     private boolean status;
 }

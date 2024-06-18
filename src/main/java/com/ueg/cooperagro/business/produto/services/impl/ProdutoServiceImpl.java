@@ -45,4 +45,9 @@ public class ProdutoServiceImpl extends GenericCrudServiceImpl<Produto, Long, Pr
     public List<Produto> getAll(Long agricultorId) {
         return produtoRepository.findAllByAgricultorId(agricultorId);
     }
+
+    @Override
+    public List<Produto> getByCategoria(String categoria) {
+        return produtoRepository.findAllByCategoria(categoria);
+    }
 }

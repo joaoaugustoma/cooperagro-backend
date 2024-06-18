@@ -6,6 +6,7 @@ import com.ueg.cooperagro.business.produto.models.dtos.ProdutoDTO;
 import com.ueg.cooperagro.business.produto.models.dtos.ProdutoDataDTO;
 import com.ueg.cooperagro.business.produto.models.dtos.ProdutoListDTO;
 import com.ueg.cooperagro.business.produto.services.ProdutoService;
+import com.ueg.cooperagro.business.usuario.models.Agricultor;
 import com.ueg.cooperagro.business.usuario.services.AgricultorService;
 import com.ueg.cooperagro.generic.controller.GenericCrudController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,9 @@ public class ProdutoController extends
     @PostMapping
     public ResponseEntity<ProdutoDTO> create(@RequestBody ProdutoDataDTO dto) {
         Produto inputModel = mapper.fromModelCreatedToModel(dto);
-        inputModel.setAgricultor(agricultorService.getById(dto.getIdAgricultor()));
-        if(dto.getUploadFoto() != null) inputModel.setByteFoto(Base64.getDecoder().decode(dto.getUploadFoto()));
+        Agricultor agricultor = agricultorService.getById(dto.getIdAgricultor());
+        inputModel.setAgricultor(agricultor);
+        inputModel.setNomeLoja(agricultor.getNomeLoja());
         ProdutoDTO resultDTO = mapper.toDTO(service.create(inputModel));
         return ResponseEntity.ok(resultDTO);
     }
@@ -45,6 +47,14 @@ public class ProdutoController extends
     @GetMapping(path = "/listar/{agricultorId}")
     public ResponseEntity<java.util.List<ProdutoListDTO>> listAll(@PathVariable Long agricultorId) {
         List<ProdutoListDTO> modelList = mapper.fromModelToDTOList(service.getAll(agricultorId));
+        return ResponseEntity.of(
+                java.util.Optional.ofNullable(modelList)
+        );
+    }
+
+    @GetMapping(path = "/categoria/{categoria}")
+    public ResponseEntity<java.util.List<ProdutoListDTO>> listByCategoria(@PathVariable String categoria) {
+        List<ProdutoListDTO> modelList = mapper.fromModelToDTOList(service.getByCategoria(categoria));
         return ResponseEntity.of(
                 java.util.Optional.ofNullable(modelList)
         );

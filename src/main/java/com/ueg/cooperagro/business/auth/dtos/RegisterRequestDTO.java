@@ -9,7 +9,7 @@ public record RegisterRequestDTO(
         String senhaConfirm,
         String cnpj,
         String razaoSocial,
-        String uploadFoto,
+        byte[] byteFoto,
         String typeFoto,
         boolean isAgricultor,
         EnderecoDataDTO endereco) {

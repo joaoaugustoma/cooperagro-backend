@@ -41,7 +41,7 @@ public class AuthService {
         novoUsuario.setAgricultor(false);
         novoUsuario.setTelefone(body.telefone());
         novoUsuario.setStatus(true);
-        novoUsuario.setByteFoto(Base64.getDecoder().decode(body.uploadFoto()));
+        novoUsuario.setByteFoto(body.byteFoto());
         novoUsuario.setTypeFoto(body.typeFoto());
 
         novoUsuario.setAgricultor(false);
