@@ -37,11 +37,22 @@ public class ProdutoController extends
     @PostMapping
     public ResponseEntity<ProdutoDTO> create(@RequestBody ProdutoDataDTO dto) {
         Produto inputModel = mapper.fromModelCreatedToModel(dto);
-        Agricultor agricultor = agricultorService.getById(dto.getIdAgricultor());
-        inputModel.setAgricultor(agricultor);
-        inputModel.setNomeLoja(agricultor.getNomeLoja());
-        ProdutoDTO resultDTO = mapper.toDTO(service.create(inputModel));
-        return ResponseEntity.ok(resultDTO);
+        if(dto.getIdAgricultor() != null){
+            Agricultor agricultor = agricultorService.getById(dto.getIdAgricultor());
+            inputModel.setAgricultor(agricultor);
+            inputModel.setNomeLoja(agricultor.getNomeLoja());
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+
+        try {
+            ProdutoDTO resultDTO = mapper.toDTO(service.create(inputModel));
+            return ResponseEntity.ok(resultDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping(path = "/listar/{agricultorId}")
