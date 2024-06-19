@@ -1,5 +1,6 @@
 package com.ueg.cooperagro.business.usuario.models.dtos;
 
+import com.ueg.cooperagro.business.usuario.models.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,10 +13,12 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AgricultorDTO {
-    private String nomeFantasia;
-    private String clientId;
-    private String clientSecret;
-    private String refreshToken;
-    private Long expiresIn;
-    private Long usuarioId;
+    private Long id;
+    private Usuario usuario;
+    private String nomeLoja;
+    private String gatewayPagamentoClientId;
+    private String gatewayPagamentoClientSecret;
+    private String gatewayPagamentoRefreshToken;
+    private Long gatewayPagamentoExpiresIn;
+    private boolean status;
 }

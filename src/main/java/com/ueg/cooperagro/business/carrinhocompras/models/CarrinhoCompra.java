@@ -3,6 +3,7 @@ package com.ueg.cooperagro.business.carrinhocompras.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ueg.cooperagro.business.pedidovenda.models.PedidoVenda;
 import com.ueg.cooperagro.business.produto.models.Produto;
+import com.ueg.cooperagro.business.usuario.models.Agricultor;
 import com.ueg.cooperagro.business.usuario.models.Usuario;
 import com.ueg.cooperagro.generic.model.GenericModel;
 import jakarta.persistence.*;

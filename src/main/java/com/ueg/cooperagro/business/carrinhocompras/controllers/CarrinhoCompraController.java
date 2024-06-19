@@ -40,6 +40,8 @@ public class CarrinhoCompraController extends
         if(carrinho == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(mapper.toDTO(carrinho));
+        CarrinhoCompraDTO dto = mapper.toDTO(carrinho);
+        dto.setNomeAgricultor(carrinho.getProdutos().get(0).getAgricultor().getNomeLoja());
+        return ResponseEntity.ok(dto);
     }
 }
