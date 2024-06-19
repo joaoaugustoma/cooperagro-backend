@@ -18,5 +18,5 @@ public class CarrinhoCompraDTO {
     private Long id;
     private Double valorTotal;
     private Integer quantidadeTotal;
-    private List<ProdutoDTO> itensCarrinho;
+    private List<ProdutoDTO> produtos;
 }

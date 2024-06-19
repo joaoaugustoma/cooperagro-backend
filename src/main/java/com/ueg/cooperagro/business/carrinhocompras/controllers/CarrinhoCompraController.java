@@ -31,6 +31,15 @@ public class CarrinhoCompraController extends
         }
 
         CarrinhoCompra carrinho = service.adicionarProdutoAoCarrinho(request.email(), request.produtoId());
+        return ResponseEntity.ok(mapper.toDTO(service.getCarrinhoAtivo(request.email())));
+    }
+
+    @PostMapping("/ativo")
+    public ResponseEntity<CarrinhoCompraDTO> getCarrinhoAtivo(@RequestBody String email) {
+        CarrinhoCompra carrinho = service.getCarrinhoAtivo(email);
+        if(carrinho == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(mapper.toDTO(carrinho));
     }
 }

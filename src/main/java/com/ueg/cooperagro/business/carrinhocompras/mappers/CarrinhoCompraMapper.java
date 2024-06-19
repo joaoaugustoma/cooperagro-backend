@@ -23,4 +23,5 @@ public interface CarrinhoCompraMapper extends GenericMapper<
         CarrinhoCompra, // Model
         Long // PK_TYPE
         > {
+
 }

@@ -2,6 +2,7 @@ package com.ueg.cooperagro.business.carrinhocompras.models.dtos;
 
 import com.ueg.cooperagro.business.pedidovenda.models.PedidoVenda;
 import com.ueg.cooperagro.business.produto.models.Produto;
+import com.ueg.cooperagro.business.produto.models.dtos.ProdutoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,6 @@ import java.util.List;
 public class CarrinhoCompraDataDTO {
     private Double valorTotal;
     private Integer quantidadeTotal;
-    private List<Produto> itensCarrinho;
+    private List<ProdutoDTO> produtos;
     private PedidoVenda pedidoVenda;
 }
