@@ -19,8 +19,8 @@ import lombok.experimental.SuperBuilder;
 public class Produto implements GenericModel<Long> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_PRODUTO", nullable = false)
     private Long id;
 
     @Column(name = "TITULO", nullable = false)

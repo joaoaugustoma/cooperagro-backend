@@ -23,7 +23,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 public class Usuario implements GenericModel<Long> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Long id;
 

@@ -1,7 +1,6 @@
 package com.ueg.cooperagro.business.carrinhocompras.models.dtos;
 
-import com.ueg.cooperagro.business.pedidovenda.models.PedidoVenda;
-import com.ueg.cooperagro.business.produto.models.Produto;
+import com.ueg.cooperagro.business.produto.models.dtos.ProdutoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +18,5 @@ public class CarrinhoCompraDTO {
     private Long id;
     private Double valorTotal;
     private Integer quantidadeTotal;
-    private List<Produto> itensCarrinho;
-    private PedidoVenda pedidoVenda;
+    private List<ProdutoDTO> itensCarrinho;
 }

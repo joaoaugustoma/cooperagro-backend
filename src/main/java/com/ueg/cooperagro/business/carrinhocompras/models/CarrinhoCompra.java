@@ -1,7 +1,9 @@
 package com.ueg.cooperagro.business.carrinhocompras.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ueg.cooperagro.business.pedidovenda.models.PedidoVenda;
 import com.ueg.cooperagro.business.produto.models.Produto;
+import com.ueg.cooperagro.business.usuario.models.Usuario;
 import com.ueg.cooperagro.generic.model.GenericModel;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,7 +25,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 public class CarrinhoCompra implements GenericModel<Long> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Long id;
 
@@ -36,7 +38,20 @@ public class CarrinhoCompra implements GenericModel<Long> {
     @Column(name = "DATA_CRIACAO", nullable = false)
     private Date dataCriacao;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_CARRINHO_COMPRA")
-    private List<Produto> itensCarrinho;
+    @Column(name = "STATUS")
+    private boolean status;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_USUARIO")
+    private Usuario usuario;
+
+    @ManyToMany
+    @JoinTable(
+            name = "CARRINHO_COMPRA_PRODUTO",
+            joinColumns = @JoinColumn(name = "ID_USUARIO"),
+            inverseJoinColumns = @JoinColumn(name = "ID_PRODUTO")
+    )
+    @JsonManagedReference
+    private List<Produto> produtos;
+
 }
