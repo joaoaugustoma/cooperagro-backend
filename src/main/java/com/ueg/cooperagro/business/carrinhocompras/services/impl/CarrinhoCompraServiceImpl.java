@@ -56,6 +56,10 @@ public class CarrinhoCompraServiceImpl extends GenericCrudServiceImpl<CarrinhoCo
 
         CarrinhoCompra carrinho = repository.findByUsuarioAndStatusTrue(usuario).orElseGet(() -> criarNovoCarrinho(usuario));
 
+        if(!carrinho.getProdutos().getFirst().getAgricultor().getNomeLoja().equals(produto.getAgricultor().getNomeLoja())) {
+            throw new IllegalArgumentException("Não é possível adicionar produtos de lojas diferentes ao mesmo carrinho.");
+        }
+
         carrinho.getProdutos().add(produto);
         carrinho.setQuantidadeTotal(carrinho.getQuantidadeTotal() + 1);
         carrinho.setValorTotal(carrinho.getValorTotal() + produto.getPrecoUnitario());

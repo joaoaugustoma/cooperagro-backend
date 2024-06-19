@@ -26,11 +26,11 @@ public class CarrinhoCompraController extends
 {
     @PostMapping("/add-produto")
     public ResponseEntity<CarrinhoCompraDTO> adicionarProdutoAoCarrinho(@RequestBody AddProdutoCarrinhoCompraRequestDTO request) {
-        if(request.email() == null || request.produtoId() == null) {
+        try{
+            CarrinhoCompra carrinho = service.adicionarProdutoAoCarrinho(request.email(), request.produtoId());
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
-
-        CarrinhoCompra carrinho = service.adicionarProdutoAoCarrinho(request.email(), request.produtoId());
         return ResponseEntity.ok(mapper.toDTO(service.getCarrinhoAtivo(request.email())));
     }
 
