@@ -1,7 +1,6 @@
 package com.ueg.cooperagro.business.pedidovenda.models.dtos;
 
-import com.ueg.cooperagro.business.carrinhocompras.models.CarrinhoCompra;
-import com.ueg.cooperagro.business.pedidovenda.models.enums.SituacaoPedidoEnum;
+import com.ueg.cooperagro.business.carrinhocompras.models.dtos.CarrinhoCompraDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +18,6 @@ public class PedidoVendaDataDTO {
     private Double valorTotalPedido;
     private Date dataCriacao;
     private Date dataPagamento;
-    private SituacaoPedidoEnum situacaoPedido;
-    private CarrinhoCompra carrinhoCompra;
+    private String situacaoPedido;
+    private CarrinhoCompraDTO carrinhoCompra;
 }

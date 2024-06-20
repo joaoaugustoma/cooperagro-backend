@@ -7,8 +7,8 @@ import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDataDTO;
 import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaListDTO;
 import com.ueg.cooperagro.generic.controller.GenericCrudController;
 import com.ueg.cooperagro.business.pedidovenda.services.PedidoVendaService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "${api.version}/pedido-venda")
@@ -23,4 +23,10 @@ public class PedidoVendaController extends
                 PedidoVendaService, //Interface Serviço
                 PedidoVendaMapper> // Mapper
 {
+    @PostMapping("/create/{email}")
+    public ResponseEntity<PedidoVendaDTO> create(@RequestBody PedidoVendaDataDTO pedidoVendaDataDTO, @PathVariable String email) {
+        System.out.println(pedidoVendaDataDTO);
+        System.out.println(email);
+        return null;
+    }
 }

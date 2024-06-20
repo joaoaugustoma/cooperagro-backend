@@ -32,18 +32,6 @@ public class Agricultor implements GenericModel<Long> {
     @Column(name = "NOME_LOJA", nullable = false)
     private String nomeLoja;
 
-    @Column(name = "GATEWAY_PAGAMENTO_CLIENT_ID")
-    private String gatewayPagamentoClientId;
-
-    @Column(name = "GATEWAY_PAGAMENTO_CLIENT_SECRET")
-    private String gatewayPagamentoClientSecret;
-
-    @Column(name = "GATEWAY_PAGAMENTO_REFRESH_TOKEN")
-    private String gatewayPagamentoRefreshToken;
-
-    @Column(name = "GATEWAY_PAGAMENTO_EXPIRES_IN")
-    private Long gatewayPagamentoExpiresIn;
-
     @Column(name = "STATUS", nullable = false)
     private boolean status = true;
 
@@ -51,4 +39,9 @@ public class Agricultor implements GenericModel<Long> {
     @JsonManagedReference
     private List<Produto> produtos;
 
+    @Column(name = "CLIENT_ID")
+    private String clientId;
+
+    @Column(name = "CLIENT_SECRET")
+    private String clientSecret;
 }

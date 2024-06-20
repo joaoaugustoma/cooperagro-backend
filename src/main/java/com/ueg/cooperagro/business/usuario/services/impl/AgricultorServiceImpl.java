@@ -9,7 +9,6 @@ import com.ueg.cooperagro.business.usuario.services.AgricultorService;
 import com.ueg.cooperagro.generic.service.impl.GenericCrudServiceImpl;
 import com.ueg.cooperagro.security.TokenService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -47,8 +46,7 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
 
     @Override
     public String tornarAgricultor(TornarAgricultorRequestDTO request) {
-        Usuario usuario = usuarioRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado!"));
+        Usuario usuario = usuarioRepository.findByEmail(request.getEmail()).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado!"));
 
         usuario.setAgricultor(true);
         usuarioRepository.save(usuario);
@@ -56,6 +54,8 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
         Agricultor agricultor = new Agricultor();
         agricultor.setNomeLoja(request.getNomeLoja());
         agricultor.setUsuario(usuario);
+        agricultor.setClientId(request.getClientId());
+        agricultor.setClientSecret(request.getClientSecret());
 
         repository.save(agricultor);
 
@@ -64,15 +64,13 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
 
     @Override
     public String cancelarAgricultor(String email) {
-        Usuario usuario = usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado!"));
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado!"));
 
         usuario.setAgricultor(false);
         usuario.setStatus(true);
         usuarioRepository.save(usuario);
 
-        Agricultor agricultor = repository.findByUsuarioId(usuario.getId())
-                .orElseThrow(() -> new UsernameNotFoundException("Agricultor não encontrado!"));
+        Agricultor agricultor = repository.findByUsuarioId(usuario.getId()).orElseThrow(() -> new UsernameNotFoundException("Agricultor não encontrado!"));
         repository.delete(agricultor);
 
         return tokenService.generateToken(usuario);
@@ -82,5 +80,4 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
     public Long getIdAgricultorByEmail(String email) {
         return repository.getAgricultorIdByEmail(email);
     }
-
 }

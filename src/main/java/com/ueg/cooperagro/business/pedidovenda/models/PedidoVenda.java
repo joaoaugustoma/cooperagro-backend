@@ -1,15 +1,12 @@
 package com.ueg.cooperagro.business.pedidovenda.models;
 
 import com.ueg.cooperagro.business.carrinhocompras.models.CarrinhoCompra;
-import com.ueg.cooperagro.business.pedidovenda.models.enums.SituacaoPedidoEnum;
 import com.ueg.cooperagro.generic.model.GenericModel;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
-
-import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Getter
 @Setter
@@ -33,12 +30,11 @@ public class PedidoVenda implements GenericModel<Long> {
     @Column(name = "DATA_CRIACAO", nullable = false)
     private Date dataCriacao;
 
-    @Column(name = "DATA_PAGAMENTO", nullable = false)
+    @Column(name = "DATA_PAGAMENTO")
     private Date dataPagamento;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "SITUACAO_PEDIDO", nullable = false)
-    private SituacaoPedidoEnum situacaoPedido;
+    private String situacaoPedido;
 
     @OneToOne
     @JoinColumn(name = "ID_CARRINHO_COMPRA", nullable = false)
