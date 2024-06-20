@@ -7,4 +7,6 @@ public interface CarrinhoCompraService extends CrudService<CarrinhoCompra, Long>
     CarrinhoCompra adicionarProdutoAoCarrinho(String email, Long produtoId);
 
     CarrinhoCompra getCarrinhoAtivo(String email);
+
+    void removerProdutoDoCarrinho(String email, Long aLong);
 }

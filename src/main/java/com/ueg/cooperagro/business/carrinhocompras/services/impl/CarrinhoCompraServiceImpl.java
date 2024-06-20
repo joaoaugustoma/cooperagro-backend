@@ -72,6 +72,19 @@ public class CarrinhoCompraServiceImpl extends GenericCrudServiceImpl<CarrinhoCo
         return repository.findByUsuarioAndStatusTrue(usuario).orElseThrow(() -> new RuntimeException("Carrinho não encontrado"));
     }
 
+    @Override
+    public void removerProdutoDoCarrinho(String email, Long produtoId) {
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        Produto produto = produtoRepository.findById(produtoId).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        CarrinhoCompra carrinho = repository.findByUsuarioAndStatusTrue(usuario).orElseThrow(() -> new RuntimeException("Carrinho não encontrado"));
+
+        carrinho.getProdutos().remove(produto);
+        carrinho.setQuantidadeTotal(carrinho.getQuantidadeTotal() - 1);
+        carrinho.setValorTotal(carrinho.getValorTotal() - produto.getPrecoUnitario());
+        repository.save(carrinho);
+    }
+
     private CarrinhoCompra criarNovoCarrinho(Usuario usuario) {
         CarrinhoCompra novoCarrinho = new CarrinhoCompra();
         novoCarrinho.setDataCriacao(new Date());
