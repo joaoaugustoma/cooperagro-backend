@@ -43,4 +43,18 @@ public class EnderecoController extends
         return resultado.map(consultaCepDTO -> new ResponseEntity<>(consultaCepDTO, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/email/{email}")
+    public ResponseEntity<EnderecoDTO> buscarEnderecoPorEmail(@PathVariable String email) {
+        Endereco resultado = null;
+
+        try {
+            resultado = service.buscarEnderecoPorEmail(email);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        if (resultado == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(mapper.toDTO(resultado), HttpStatus.OK);
+    }
 }

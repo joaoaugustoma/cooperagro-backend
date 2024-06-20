@@ -21,5 +21,4 @@ public class EnderecoDTO {
     private String cidade;
     private String estado;
     private boolean isPrincipal;
-    private boolean status;
 }
