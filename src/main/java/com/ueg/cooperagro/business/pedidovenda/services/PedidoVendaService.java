@@ -1,7 +1,8 @@
 package com.ueg.cooperagro.business.pedidovenda.services;
 
-import com.ueg.cooperagro.business.pedidovenda.models.PedidoVenda;
-import com.ueg.cooperagro.generic.service.CrudService;
+import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDTO;
+import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDataDTO;
 
-public interface PedidoVendaService extends CrudService<PedidoVenda, Long> {
+public interface PedidoVendaService {
+    PedidoVendaDTO createPedidoVenda(PedidoVendaDataDTO pedidoVendaDataDTO, String email);
 }

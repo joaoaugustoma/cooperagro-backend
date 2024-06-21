@@ -1,32 +1,27 @@
 package com.ueg.cooperagro.business.pedidovenda.controllers;
 
 import com.ueg.cooperagro.business.pedidovenda.mappers.PedidoVendaMapper;
-import com.ueg.cooperagro.business.pedidovenda.models.PedidoVenda;
 import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDTO;
 import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDataDTO;
-import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaListDTO;
-import com.ueg.cooperagro.generic.controller.GenericCrudController;
 import com.ueg.cooperagro.business.pedidovenda.services.PedidoVendaService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "${api.version}/pedido-venda")
-public class PedidoVendaController extends
-        GenericCrudController<
-                PedidoVendaDTO, // DTO Geral
-                PedidoVendaDataDTO, // DTO Create
-                PedidoVendaDataDTO, // DTO Update
-                PedidoVendaListDTO,
-                PedidoVenda, // Modelo
-                Long, // PK_TYPE
-                PedidoVendaService, //Interface Serviço
-                PedidoVendaMapper> // Mapper
-{
+@RequiredArgsConstructor
+public class PedidoVendaController {
+
+    private final PedidoVendaService service;
+    private final PedidoVendaMapper mapper;
+
     @PostMapping("/create/{email}")
     public ResponseEntity<PedidoVendaDTO> create(@RequestBody PedidoVendaDataDTO pedidoVendaDataDTO, @PathVariable String email) {
-        System.out.println(pedidoVendaDataDTO);
-        System.out.println(email);
-        return null;
+        PedidoVendaDTO pedidoVendaDTO = service.createPedidoVenda(pedidoVendaDataDTO, email);
+        if (pedidoVendaDTO == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(pedidoVendaDTO, HttpStatus.CREATED);
     }
 }
