@@ -7,6 +7,5 @@ public class TornarAgricultorRequestDTO {
 
     private String email;
     private String nomeLoja;
-    private String clientId;
-    private String clientSecret;
+    private String mercadoPagoPublicKey;
 }

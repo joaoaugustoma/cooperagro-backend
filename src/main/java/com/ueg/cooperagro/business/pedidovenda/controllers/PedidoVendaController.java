@@ -29,8 +29,7 @@ public class PedidoVendaController {
     @PostMapping("/mercado-pago/create-preference")
     public ResponseEntity<PreferenceResponse> createPreference(@RequestBody PedidoVendaDataDTO pedidoVendaDataDTO) {
         try{
-            PreferenceResponse preferenceResponse = new PreferenceResponse(service.createPreference(pedidoVendaDataDTO));
-            return new ResponseEntity<>(preferenceResponse, HttpStatus.CREATED);
+            return new ResponseEntity<>(service.createPreference(pedidoVendaDataDTO), HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -54,8 +54,7 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
         Agricultor agricultor = new Agricultor();
         agricultor.setNomeLoja(request.getNomeLoja());
         agricultor.setUsuario(usuario);
-        agricultor.setClientId(request.getClientId());
-        agricultor.setClientSecret(request.getClientSecret());
+        agricultor.setMercadoPagoPublicKey(request.getMercadoPagoPublicKey());
 
         repository.save(agricultor);
 

@@ -13,8 +13,11 @@ import com.ueg.cooperagro.business.pedidovenda.mappers.PedidoVendaMapper;
 import com.ueg.cooperagro.business.pedidovenda.models.PedidoVenda;
 import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDTO;
 import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDataDTO;
+import com.ueg.cooperagro.business.pedidovenda.models.dtos.PreferenceResponse;
 import com.ueg.cooperagro.business.pedidovenda.repositories.PedidoVendaRepository;
 import com.ueg.cooperagro.business.pedidovenda.services.PedidoVendaService;
+import com.ueg.cooperagro.business.usuario.models.Agricultor;
+import com.ueg.cooperagro.business.usuario.repositories.AgricultorRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -36,6 +39,8 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
     private PedidoVendaMapper mapper;
     @Autowired
     private CarrinhoCompraRepository carirnhoCompraRepository;
+    @Autowired
+    private AgricultorRepository agricultorRepository;
 
     @Value("${mercado-pago.access-token}")
     private String accessToken;
@@ -61,7 +66,7 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
     }
 
     @Override
-    public String createPreference(PedidoVendaDataDTO pedidoVendaDataDTO) {
+    public PreferenceResponse createPreference(PedidoVendaDataDTO pedidoVendaDataDTO) {
         List<PreferenceItemRequest> items = new ArrayList<>();
 
         pedidoVendaDataDTO.getCarrinhoCompra().getProdutos().forEach(produto -> {
@@ -91,7 +96,10 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
         PreferenceClient client = new PreferenceClient();
         try {
             Preference preference = client.create(preferenceRequest);
-            return preference.getId();
+
+            Agricultor agricultor = agricultorRepository.findById(pedidoVendaDataDTO.getCarrinhoCompra().getProdutos().getFirst().getIdAgricultor()).get();
+
+            return new PreferenceResponse(preference.getId(), agricultor.getMercadoPagoPublicKey());
         } catch (MPApiException e) {
             throw new RuntimeException("Erro ao criar a preferência: " + e.getApiResponse().getContent(), e);
         } catch (MPException e) {
