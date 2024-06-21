@@ -3,6 +3,7 @@ package com.ueg.cooperagro.business.pedidovenda.controllers;
 import com.ueg.cooperagro.business.pedidovenda.mappers.PedidoVendaMapper;
 import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDTO;
 import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDataDTO;
+import com.ueg.cooperagro.business.pedidovenda.models.dtos.PreferenceResponse;
 import com.ueg.cooperagro.business.pedidovenda.services.PedidoVendaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,5 +24,16 @@ public class PedidoVendaController {
         if (pedidoVendaDTO == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(pedidoVendaDTO, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/mercado-pago/create-preference")
+    public ResponseEntity<PreferenceResponse> createPreference(@RequestBody PedidoVendaDataDTO pedidoVendaDataDTO) {
+        try{
+            PreferenceResponse preferenceResponse = new PreferenceResponse(service.createPreference(pedidoVendaDataDTO));
+            return new ResponseEntity<>(preferenceResponse, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }
