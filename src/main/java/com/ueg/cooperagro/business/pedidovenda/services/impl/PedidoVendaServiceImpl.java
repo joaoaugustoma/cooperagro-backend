@@ -16,11 +16,12 @@ import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDataDTO;
 import com.ueg.cooperagro.business.pedidovenda.models.dtos.PreferenceResponse;
 import com.ueg.cooperagro.business.pedidovenda.repositories.PedidoVendaRepository;
 import com.ueg.cooperagro.business.pedidovenda.services.PedidoVendaService;
+import com.ueg.cooperagro.business.produto.models.Produto;
+import com.ueg.cooperagro.business.produto.repositories.ProdutoRepository;
 import com.ueg.cooperagro.business.usuario.models.Agricultor;
 import com.ueg.cooperagro.business.usuario.repositories.AgricultorRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @Slf4j
@@ -44,6 +46,8 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
 
     @Value("${mercado-pago.access-token}")
     private String accessToken;
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
     @PostConstruct
     public void init() {
@@ -96,10 +100,15 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
         PreferenceClient client = new PreferenceClient();
         try {
             Preference preference = client.create(preferenceRequest);
+            AtomicReference<String> agricultorPublicKey = new AtomicReference<>();
+            pedidoVendaDataDTO.getCarrinhoCompra().getProdutos().forEach(produtoDTO -> {
+                Produto produto = produtoRepository.findById(produtoDTO.getId()).get();
+                Agricultor agricultor = agricultorRepository.findById(produto.getAgricultor().getId()).get();
+                agricultorPublicKey.set(agricultor.getMercadoPagoPublicKey());
+            });
 
-            Agricultor agricultor = agricultorRepository.findById(pedidoVendaDataDTO.getCarrinhoCompra().getProdutos().getFirst().getIdAgricultor()).get();
 
-            return new PreferenceResponse(preference.getId(), agricultor.getMercadoPagoPublicKey());
+            return new PreferenceResponse(preference.getId(), agricultorPublicKey.get());
         } catch (MPApiException e) {
             throw new RuntimeException("Erro ao criar a preferência: " + e.getApiResponse().getContent(), e);
         } catch (MPException e) {
