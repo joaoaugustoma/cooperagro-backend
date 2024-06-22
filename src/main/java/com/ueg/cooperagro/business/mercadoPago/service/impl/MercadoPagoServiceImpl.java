@@ -53,7 +53,7 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
     }
 
     @Override
-    public MercadoPagoOAuthResponse createToken(MercadoPagoOAuthRequest request) {
+    public ResponseEntity<MercadoPagoOAuthResponse> createToken(MercadoPagoOAuthRequest request) {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -61,14 +61,17 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
 
         HttpEntity<MercadoPagoOAuthRequest> entity = new HttpEntity<>(request, headers);
 
-        ResponseEntity<MercadoPagoOAuthResponse> responseEntity = restTemplate.exchange(
-                "https://api.mercadopago.com/oauth/token",
-                HttpMethod.POST,
-                entity,
-                MercadoPagoOAuthResponse.class
-        );
-
-        return responseEntity.getBody();
+        try {
+            return restTemplate.exchange(
+                    "https://api.mercadopago.com/oauth/token",
+                    HttpMethod.POST,
+                    entity,
+                    MercadoPagoOAuthResponse.class
+            );
+        } catch (Exception e) {
+            log.error("Erro ao criar token de autenticação", e);
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @Override
@@ -89,9 +92,9 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
         });
 
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-                .success("http://localhost:8080/success")
-                .failure("http://localhost:8080/failure")
-                .pending("http://localhost:8080/pending")
+                .success("http://localhost:8080/mercado-pago/success")
+                .failure("http://localhost:8080/mercado-pago/failure")
+                .pending("http://localhost:8080/mercado-pago/pending")
                 .build();
 
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
