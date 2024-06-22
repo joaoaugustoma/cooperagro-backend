@@ -1,5 +1,8 @@
 package com.ueg.cooperagro.business.usuario.services.impl;
 
+import com.ueg.cooperagro.business.mercadoPago.dtos.MercadoPagoOAuthRequest;
+import com.ueg.cooperagro.business.mercadoPago.dtos.MercadoPagoOAuthResponse;
+import com.ueg.cooperagro.business.mercadoPago.service.MercadoPagoService;
 import com.ueg.cooperagro.business.usuario.models.Agricultor;
 import com.ueg.cooperagro.business.usuario.models.Usuario;
 import com.ueg.cooperagro.business.usuario.models.dtos.TornarAgricultorRequestDTO;
@@ -8,6 +11,7 @@ import com.ueg.cooperagro.business.usuario.repositories.UsuarioRepository;
 import com.ueg.cooperagro.business.usuario.services.AgricultorService;
 import com.ueg.cooperagro.generic.service.impl.GenericCrudServiceImpl;
 import com.ueg.cooperagro.security.TokenService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -18,6 +22,7 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
 
     private final TokenService tokenService;
     private final UsuarioRepository usuarioRepository;
+    private final MercadoPagoService mercadoPagoService;
 
     @Override
     protected void prepareToCreate(Agricultor dado) {
@@ -45,6 +50,7 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
     }
 
     @Override
+    @Transactional
     public String tornarAgricultor(TornarAgricultorRequestDTO request) {
         Usuario usuario = usuarioRepository.findByEmail(request.getEmail()).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado!"));
 
@@ -54,7 +60,22 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
         Agricultor agricultor = new Agricultor();
         agricultor.setNomeLoja(request.getNomeLoja());
         agricultor.setUsuario(usuario);
-        agricultor.setMercadoPagoPublicKey(request.getMercadoPagoPublicKey());
+        agricultor.setMercadoPagoClientId(request.getMercadoPagoClientId());
+        agricultor.setMercadoPagoClientSecret(request.getMercadoPagoClientSecret());
+
+        MercadoPagoOAuthRequest mercadoPagoRequest = new MercadoPagoOAuthRequest();
+        mercadoPagoRequest.setClient_id(request.getMercadoPagoClientId());
+        mercadoPagoRequest.setClient_secret(request.getMercadoPagoClientSecret());
+        mercadoPagoRequest.setGrant_type("client_credentials");
+        mercadoPagoRequest.setTest_token(true); //setar false para gerar credenciais de produção
+
+        MercadoPagoOAuthResponse mercadoPagoResponse = mercadoPagoService.createToken(mercadoPagoRequest).getBody();
+
+        if(mercadoPagoResponse == null) {
+            throw new RuntimeException("Erro ao criar token do mercado pago!");
+        }
+
+        agricultor.setMercadoPagoPublicKey(mercadoPagoResponse.getPublic_key());
 
         repository.save(agricultor);
 

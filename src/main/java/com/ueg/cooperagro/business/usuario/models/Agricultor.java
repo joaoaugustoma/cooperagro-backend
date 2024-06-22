@@ -39,6 +39,12 @@ public class Agricultor implements GenericModel<Long> {
     @JsonManagedReference
     private List<Produto> produtos;
 
-    @Column(name = "MERCADO_PAGO_PUBLIC_KEY", nullable = false)
+    @Column(name = "MERCADO_PAGO_PUBLIC_KEY")
     private String mercadoPagoPublicKey;
+
+    @Column(name = "MERCADO_PAGO_CLIENT_ID", nullable = false)
+    private String mercadoPagoClientId;
+
+    @Column(name = "MERCADO_PAGO_CLIENT_SECRET", nullable = false)
+    private String mercadoPagoClientSecret;
 }

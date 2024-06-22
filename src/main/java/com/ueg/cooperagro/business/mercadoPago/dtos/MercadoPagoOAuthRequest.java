@@ -10,4 +10,5 @@ public class MercadoPagoOAuthRequest {
     private String code;
     private String redirect_uri;
     private String refresh_token;
+    private boolean test_token;
 }

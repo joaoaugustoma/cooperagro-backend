@@ -4,8 +4,9 @@ import lombok.Data;
 
 @Data
 public class TornarAgricultorRequestDTO {
-
     private String email;
     private String nomeLoja;
     private String mercadoPagoPublicKey;
+    private String mercadoPagoClientId;
+    private String mercadoPagoClientSecret;
 }
