@@ -7,5 +7,4 @@ import com.ueg.cooperagro.business.pedidovenda.models.dtos.PreferenceResponse;
 public interface PedidoVendaService {
     PedidoVendaDTO createPedidoVenda(PedidoVendaDataDTO pedidoVendaDataDTO, String email);
 
-    PreferenceResponse createPreference(PedidoVendaDataDTO pedidoVendaDataDTO);
 }
