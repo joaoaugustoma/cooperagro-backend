@@ -62,4 +62,19 @@ public class PedidoVendaController {
 
         return new ResponseEntity<>(pedidoVendaDTO, HttpStatus.OK);
     }
+
+    @GetMapping("/all/{emailUsuario}")
+    public ResponseEntity<List<PedidoVendaDTO>> getAllPedidosVenda(@PathVariable String emailUsuario) {
+        List<PedidoVendaDTO> pedidosVendaDTO = new ArrayList<>();
+
+        service.getByEmailUsuario(emailUsuario).forEach(pedidoVenda -> {
+            PedidoVendaDTO pedidoVendaDTO = mapper.toDTO(pedidoVenda);
+            pedidoVendaDTO.setNomeCliente(pedidoVenda.getCarrinhoCompra().getUsuario().getNomeRazaoSocial());
+            pedidoVendaDTO.setSituacaoEntrega(pedidoVenda.getSituacaoEntrega() != null ? pedidoVenda.getSituacaoEntrega() : "");
+            pedidoVendaDTO.getCarrinhoCompra().setNomeAgricultor(pedidoVenda.getCarrinhoCompra().getUsuario().getNomeRazaoSocial());
+            pedidosVendaDTO.add(pedidoVendaDTO);
+        });
+
+        return new ResponseEntity<>(pedidosVendaDTO, HttpStatus.OK);
+    }
 }

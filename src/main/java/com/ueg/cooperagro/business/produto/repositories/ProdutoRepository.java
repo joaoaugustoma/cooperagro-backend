@@ -9,4 +9,5 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     List<Produto> findAllByAgricultorId(Long agricultorId);
 
     List<Produto> findAllByCategoria(String categoria);
+
 }

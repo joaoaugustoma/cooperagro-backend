@@ -16,4 +16,7 @@ public interface PedidoVendaRepository extends JpaRepository<PedidoVenda, Long> 
 
     @Query("SELECT p FROM PedidoVenda p JOIN p.carrinhoCompra c JOIN c.usuario u WHERE u.id = :id")
     Optional<PedidoVenda> findByUsuarioId(@Param("id") Long id);
+
+    @Query("SELECT p FROM PedidoVenda p JOIN p.carrinhoCompra c JOIN c.usuario u WHERE u.id = :id")
+    List<PedidoVenda> findAllByUsuarioId(@Param("id") Long id);
 }

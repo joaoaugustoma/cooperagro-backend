@@ -83,4 +83,13 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
                 () -> new RuntimeException("Pedido de venda não encontrado")
         );
     }
+
+    @Override
+    public List<PedidoVenda> getByEmailUsuario(String emailUsuario) {
+        Usuario usuario = usuarioRepository.findByEmail(emailUsuario).orElseThrow(
+                () -> new RuntimeException("Usuário não encontrado")
+        );
+
+        return repository.findAllByUsuarioId(usuario.getId());
+    }
 }
