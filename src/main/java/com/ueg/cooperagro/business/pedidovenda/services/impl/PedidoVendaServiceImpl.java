@@ -92,4 +92,11 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
 
         return repository.findAllByUsuarioId(usuario.getId());
     }
+
+    @Override
+    public PedidoVenda getById(Long id) {
+        return repository.findById(id).orElseThrow(
+                () -> new RuntimeException("Pedido de venda não encontrado")
+        );
+    }
 }

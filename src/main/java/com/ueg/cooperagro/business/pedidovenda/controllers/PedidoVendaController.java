@@ -77,4 +77,18 @@ public class PedidoVendaController {
 
         return new ResponseEntity<>(pedidosVendaDTO, HttpStatus.OK);
     }
+
+    @GetMapping("/get/{id}")
+    private ResponseEntity<PedidoVendaDTO> getById(@PathVariable Long id) {
+        PedidoVenda pedidoVenda = service.getById(id);
+        if (pedidoVenda == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        PedidoVendaDTO pedidoVendaDTO = mapper.toDTO(pedidoVenda);
+        pedidoVendaDTO.setNomeCliente(pedidoVenda.getCarrinhoCompra().getUsuario().getNomeRazaoSocial());
+        pedidoVendaDTO.setSituacaoEntrega(pedidoVenda.getSituacaoEntrega() != null ? pedidoVenda.getSituacaoEntrega() : "");
+        pedidoVendaDTO.getCarrinhoCompra().setNomeAgricultor(pedidoVenda.getCarrinhoCompra().getUsuario().getNomeRazaoSocial());
+
+        return new ResponseEntity<>(pedidoVendaDTO, HttpStatus.OK);
+    }
 }
