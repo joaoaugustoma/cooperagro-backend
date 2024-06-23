@@ -10,7 +10,9 @@ import com.ueg.cooperagro.business.pedidovenda.services.PedidoVendaService;
 import com.ueg.cooperagro.business.produto.models.Produto;
 import com.ueg.cooperagro.business.produto.repositories.ProdutoRepository;
 import com.ueg.cooperagro.business.usuario.models.Agricultor;
+import com.ueg.cooperagro.business.usuario.models.Usuario;
 import com.ueg.cooperagro.business.usuario.repositories.AgricultorRepository;
+import com.ueg.cooperagro.business.usuario.repositories.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,8 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
     private AgricultorRepository agricultorRepository;
     @Autowired
     private ProdutoRepository produtoRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Override
     public PedidoVendaDTO createPedidoVenda(PedidoVendaDataDTO pedidoVendaDataDTO, String email) {
@@ -67,5 +71,16 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
         pedidoVenda.setSituacaoEntrega("EM ENTREGA");
 
         return repository.save(pedidoVenda);
+    }
+
+    @Override
+    public PedidoVenda getUltimoPedidoVenda(String emailUsuario) {
+        Usuario usuario = usuarioRepository.findByEmail(emailUsuario).orElseThrow(
+                () -> new RuntimeException("Usuário não encontrado")
+        );
+
+        return repository.findByUsuarioId(usuario.getId()).orElseThrow(
+                () -> new RuntimeException("Pedido de venda não encontrado")
+        );
     }
 }

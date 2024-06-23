@@ -51,4 +51,15 @@ public class PedidoVendaController {
         return new ResponseEntity<>(mapper.toDTO(pedidoVenda), HttpStatus.OK);
     }
 
+    @GetMapping("/ultimo/{email}")
+    public ResponseEntity<PedidoVendaDTO> getUltimoPedidoVenda(@PathVariable String email) {
+        PedidoVenda pedidoVenda = service.getUltimoPedidoVenda(email);
+        if (pedidoVenda == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        PedidoVendaDTO pedidoVendaDTO = mapper.toDTO(pedidoVenda);
+        pedidoVendaDTO.getCarrinhoCompra().setNomeAgricultor(pedidoVenda.getCarrinhoCompra().getUsuario().getNomeRazaoSocial());
+
+        return new ResponseEntity<>(pedidoVendaDTO, HttpStatus.OK);
+    }
 }

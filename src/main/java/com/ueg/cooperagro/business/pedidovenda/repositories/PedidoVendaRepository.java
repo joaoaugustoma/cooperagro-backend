@@ -8,8 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PedidoVendaRepository extends JpaRepository<PedidoVenda, Long> {
     @Query("SELECT p FROM PedidoVenda p JOIN p.carrinhoCompra c JOIN c.produtos pr WHERE pr IN :produtos")
     List<PedidoVenda> findAllByProdutos(@Param("produtos") List<Produto> produtos);
+
+    @Query("SELECT p FROM PedidoVenda p JOIN p.carrinhoCompra c JOIN c.usuario u WHERE u.id = :id")
+    Optional<PedidoVenda> findByUsuarioId(@Param("id") Long id);
 }

@@ -12,4 +12,6 @@ public interface PedidoVendaService {
     List<PedidoVenda> getByEmailAgricultor(String email);
 
     PedidoVenda iniciarEntrega(Long id);
+
+    PedidoVenda getUltimoPedidoVenda(String email);
 }
