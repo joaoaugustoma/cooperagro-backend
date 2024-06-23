@@ -1,5 +1,7 @@
 package com.ueg.cooperagro.business.pedidovenda.controllers;
 
+import com.ueg.cooperagro.business.pedidovenda.mappers.PedidoVendaMapper;
+import com.ueg.cooperagro.business.pedidovenda.models.PedidoVenda;
 import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDTO;
 import com.ueg.cooperagro.business.pedidovenda.models.dtos.PedidoVendaDataDTO;
 import com.ueg.cooperagro.business.pedidovenda.services.PedidoVendaService;
@@ -8,12 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "${api.version}/pedido-venda")
 @RequiredArgsConstructor
 public class PedidoVendaController {
 
     private final PedidoVendaService service;
+    private final PedidoVendaMapper mapper;
 
     @PostMapping("/create/{email}")
     public ResponseEntity<PedidoVendaDTO> create(@RequestBody PedidoVendaDataDTO pedidoVendaDataDTO, @PathVariable String email) {
@@ -23,5 +29,16 @@ public class PedidoVendaController {
         return new ResponseEntity<>(pedidoVendaDTO, HttpStatus.CREATED);
     }
 
+    @GetMapping("/agricultor/{email}")
+    public ResponseEntity<List<PedidoVendaDTO>> getByEmailAgricultor(@PathVariable String email) {
+        List<PedidoVendaDTO> pedidosVendaDTO = new ArrayList<>();
 
+        service.getByEmailAgricultor(email).forEach(pedidoVenda -> {
+            PedidoVendaDTO pedidoVendaDTO = mapper.toDTO(pedidoVenda);
+            pedidoVendaDTO.setNomeCliente(pedidoVenda.getCarrinhoCompra().getUsuario().getNomeRazaoSocial());
+            pedidosVendaDTO.add(pedidoVendaDTO);
+        });
+
+        return new ResponseEntity<>(pedidosVendaDTO, HttpStatus.OK);
+    }
 }

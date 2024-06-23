@@ -12,4 +12,7 @@ public interface AgricultorRepository  extends JpaRepository<Agricultor, Long> {
 
     @Query("SELECT a.id FROM Agricultor a WHERE a.usuario.email = ?1")
     Long getAgricultorIdByEmail(String email);
+
+    @Query("SELECT a FROM Agricultor a WHERE a.usuario.email = ?1")
+    Agricultor findByEmail(String email);
 }

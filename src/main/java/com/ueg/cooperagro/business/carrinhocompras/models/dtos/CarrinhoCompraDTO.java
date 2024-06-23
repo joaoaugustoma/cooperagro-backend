@@ -1,7 +1,9 @@
 package com.ueg.cooperagro.business.carrinhocompras.models.dtos;
 
 import com.ueg.cooperagro.business.produto.models.dtos.ProdutoDTO;
+import com.ueg.cooperagro.business.usuario.models.Usuario;
 import com.ueg.cooperagro.business.usuario.models.dtos.AgricultorDTO;
+import com.ueg.cooperagro.business.usuario.models.dtos.UsuarioDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

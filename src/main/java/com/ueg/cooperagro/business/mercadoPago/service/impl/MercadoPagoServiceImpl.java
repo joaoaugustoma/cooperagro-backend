@@ -92,9 +92,9 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
         });
 
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-                .success("http://localhost:8080/mercado-pago/success")
-                .failure("http://localhost:8080/mercado-pago/failure")
-                .pending("http://localhost:8080/mercado-pago/pending")
+                .success("http://localhost:4200/mercado-pago/success")
+                .failure("http://localhost:4200/mercado-pago/failure")
+                .pending("http://localhost:4200/mercado-pago/pending")
                 .build();
 
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()

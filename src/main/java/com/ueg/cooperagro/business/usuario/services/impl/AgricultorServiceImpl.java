@@ -69,6 +69,7 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
         mercadoPagoRequest.setGrant_type("client_credentials");
         mercadoPagoRequest.setTest_token(true); //setar false para gerar credenciais de produção
 
+        /**
         MercadoPagoOAuthResponse mercadoPagoResponse = mercadoPagoService.createToken(mercadoPagoRequest).getBody();
 
         if(mercadoPagoResponse == null) {
@@ -76,6 +77,7 @@ public class AgricultorServiceImpl extends GenericCrudServiceImpl<Agricultor, Lo
         }
 
         agricultor.setMercadoPagoPublicKey(mercadoPagoResponse.getPublic_key());
+**/
 
         repository.save(agricultor);
 

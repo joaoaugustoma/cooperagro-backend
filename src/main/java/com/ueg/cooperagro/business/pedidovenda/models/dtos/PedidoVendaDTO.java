@@ -15,9 +15,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PedidoVendaDTO {
+    private Long id;
     private Double valorTotalPedido;
     private Date dataCriacao;
     private Date dataPagamento;
     private String situacaoPedido;
+    private String nomeCliente;
     private CarrinhoCompraDTO carrinhoCompra;
 }
