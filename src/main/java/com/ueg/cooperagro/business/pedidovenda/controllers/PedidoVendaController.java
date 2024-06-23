@@ -36,9 +36,19 @@ public class PedidoVendaController {
         service.getByEmailAgricultor(email).forEach(pedidoVenda -> {
             PedidoVendaDTO pedidoVendaDTO = mapper.toDTO(pedidoVenda);
             pedidoVendaDTO.setNomeCliente(pedidoVenda.getCarrinhoCompra().getUsuario().getNomeRazaoSocial());
+            pedidoVendaDTO.setSituacaoEntrega(pedidoVenda.getSituacaoEntrega() != null ? pedidoVenda.getSituacaoEntrega() : "");
             pedidosVendaDTO.add(pedidoVendaDTO);
         });
 
         return new ResponseEntity<>(pedidosVendaDTO, HttpStatus.OK);
     }
+
+    @GetMapping("/iniciar-entrega/{id}")
+    public ResponseEntity<PedidoVendaDTO> iniciarEntrega(@PathVariable Long id) {
+        PedidoVenda pedidoVenda = service.iniciarEntrega(id);
+        if (pedidoVenda == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(mapper.toDTO(pedidoVenda), HttpStatus.OK);
+    }
+
 }

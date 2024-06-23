@@ -54,4 +54,18 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
 
         return repository.findAllByProdutos(produtos);
     }
+
+    @Override
+    public PedidoVenda iniciarEntrega(Long id) {
+        PedidoVenda pedidoVenda = repository.findById(id).orElseThrow(
+                () -> new RuntimeException("Pedido de venda não encontrado")
+        );
+
+        if(!pedidoVenda.getSituacaoPedido().equals("PAGO"))
+            throw new RuntimeException("Pedido de venda não está pago");
+
+        pedidoVenda.setSituacaoEntrega("EM ENTREGA");
+
+        return repository.save(pedidoVenda);
+    }
 }

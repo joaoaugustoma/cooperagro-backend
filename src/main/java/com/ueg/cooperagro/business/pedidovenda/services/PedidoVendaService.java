@@ -10,4 +10,6 @@ public interface PedidoVendaService {
     PedidoVendaDTO createPedidoVenda(PedidoVendaDataDTO pedidoVendaDataDTO, String email);
 
     List<PedidoVenda> getByEmailAgricultor(String email);
+
+    PedidoVenda iniciarEntrega(Long id);
 }

@@ -20,6 +20,7 @@ public class PedidoVendaDTO {
     private Date dataCriacao;
     private Date dataPagamento;
     private String situacaoPedido;
+    private String situacaoEntrega;
     private String nomeCliente;
     private CarrinhoCompraDTO carrinhoCompra;
 }

@@ -36,6 +36,9 @@ public class PedidoVenda implements GenericModel<Long> {
     @Column(name = "SITUACAO_PEDIDO", nullable = false)
     private String situacaoPedido;
 
+    @Column(name = "SITUACAO_ENTREGA")
+    private String situacaoEntrega;
+
     @OneToOne
     @JoinColumn(name = "ID_CARRINHO_COMPRA", nullable = false)
     private CarrinhoCompra carrinhoCompra;
