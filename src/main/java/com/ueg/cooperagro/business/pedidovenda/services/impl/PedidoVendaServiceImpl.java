@@ -99,4 +99,18 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
                 () -> new RuntimeException("Pedido de venda não encontrado")
         );
     }
+
+    @Override
+    public PedidoVenda confirmarEntrega(Long id) {
+        PedidoVenda pedidoVenda = repository.findById(id).orElseThrow(
+                () -> new RuntimeException("Pedido de venda não encontrado")
+        );
+
+        if(!pedidoVenda.getSituacaoPedido().equals("PAGO"))
+            throw new RuntimeException("Pedido de venda não está pago");
+
+        pedidoVenda.setSituacaoEntrega("CONCLUÍDO");
+
+        return repository.save(pedidoVenda);
+    }
 }

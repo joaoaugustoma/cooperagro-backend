@@ -91,4 +91,12 @@ public class PedidoVendaController {
 
         return new ResponseEntity<>(pedidoVendaDTO, HttpStatus.OK);
     }
+
+    @GetMapping("/confirmar-entrega/{id}")
+    public ResponseEntity<PedidoVendaDTO> confirmarEntrega(@PathVariable Long id) {
+        PedidoVenda pedidoVenda = service.confirmarEntrega(id);
+        if (pedidoVenda == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(mapper.toDTO(pedidoVenda), HttpStatus.OK);
+    }
 }

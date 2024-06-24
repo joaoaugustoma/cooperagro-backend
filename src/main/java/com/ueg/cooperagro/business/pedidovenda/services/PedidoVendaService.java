@@ -18,4 +18,6 @@ public interface PedidoVendaService {
     List<PedidoVenda> getByEmailUsuario(String emailUsuario);
 
     PedidoVenda getById(Long id);
+
+    PedidoVenda confirmarEntrega(Long id);
 }
